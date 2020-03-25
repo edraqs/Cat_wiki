@@ -1,11 +1,16 @@
 package mobile.dev.catwiki
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import java.io.IOException
+import java.io.InputStream
 
 class MainActivity : AppCompatActivity(), OnItemClickListener {
 
@@ -18,12 +23,11 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         listCatBreeds = ArrayList()
-        listCatBreeds = setDataInList()
+        listCatBreeds = setDataInList("")
 
         viewManager = LinearLayoutManager(this)
-        viewAdapter = BreedAdapter(listCatBreeds!!, this)
+        viewAdapter = BreedAdapter(listCatBreeds, this)
 
         recyclerView = findViewById<RecyclerView>(R.id.cats_recycler_view)
         gridLayoutManager = GridLayoutManager(applicationContext, 2, LinearLayoutManager.VERTICAL, false)
@@ -53,51 +57,34 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         intent.putExtra("BREEDCOAT", item.coat)
         intent.putExtra("BREEDCOLOR", item.color)
         intent.putExtra("BREEDLIFESPAN", item.lifespan)
-        //intent.putExtra("BREEDIMAGE", item.image.toString())
+        intent.putExtra("BREEDIMAGE", item.image.toString())
         startActivity(intent)
     }
 
-    private fun setDataInList(): ArrayList<CatBreed>{
-        var breed1 = CatBreed("Abyssinian cat","Small to medium, with males weighing 7 to 10 pounds and females weighing 6 to 8 pounds","Medium","Ruddy, red, blue, fawn","9 to 15 years")
-        var breed2 = CatBreed("American Bobtail","Medium to large, with males weighing 12 to 16 pounds and females weighing 7 to 11 pounds ","Medium (shorthair) and long (longhair) ","White, black, blue, red, cream, chocolate, lavender, cinnamon, fawn, plus various patterns and shadings","")
-        var breed3 = CatBreed("Bengal","","","","")
-        var listCatBreeds = ArrayList<CatBreed>()
-        listCatBreeds.add(breed1)
-        listCatBreeds.add(breed2)
-        listCatBreeds.add(breed3)
-        listCatBreeds.add(breed1)
-        listCatBreeds.add(breed2)
-        listCatBreeds.add(breed3)
-        listCatBreeds.add(breed1)
-        listCatBreeds.add(breed2)
-        listCatBreeds.add(breed3)
-        listCatBreeds.add(breed1)
-        listCatBreeds.add(breed2)
-        listCatBreeds.add(breed3)
-        listCatBreeds.add(breed1)
-        listCatBreeds.add(breed2)
-        listCatBreeds.add(breed3)
-        listCatBreeds.add(breed1)
-        listCatBreeds.add(breed2)
-        listCatBreeds.add(breed3)
-        listCatBreeds.add(breed1)
-        listCatBreeds.add(breed2)
-        listCatBreeds.add(breed3)
-        listCatBreeds.add(breed1)
-        listCatBreeds.add(breed2)
-        listCatBreeds.add(breed3)
-        listCatBreeds.add(breed1)
-        listCatBreeds.add(breed2)
-        listCatBreeds.add(breed3)
-        listCatBreeds.add(breed1)
-        listCatBreeds.add(breed2)
-        listCatBreeds.add(breed3)
-        listCatBreeds.add(breed1)
-        listCatBreeds.add(breed2)
-        listCatBreeds.add(breed3)
+    private fun setDataInList(path: String): ArrayList<CatBreed> {
+        val list: Array<String>?
+        val listCatBreeds = ArrayList<CatBreed>()
+        try {
+            list = assets.list(path)
+            if (list!!.size > 0) {
+                // This is a folder
+                for (file in list) {
+                        //Parsing json
+                        if(file.endsWith(".json")) {
+                            val jsonFileString = getJsonDataFromAsset(applicationContext, file)
+                            val gson = Gson()
+                            val cat = gson.fromJson(jsonFileString, CatBreed::class.java)
+                            val filename = file.split('.')[0]
 
+                            val resID = resources.getIdentifier(filename, "drawable", packageName)
 
+                            val breed = CatBreed(cat.name, cat.size, cat.coat, cat.color, cat.lifespan, resID)
+                            listCatBreeds.add(breed)
+
+                        }
+                }
+            }
+        } catch (e: IOException) {}
         return listCatBreeds
     }
-
 }
