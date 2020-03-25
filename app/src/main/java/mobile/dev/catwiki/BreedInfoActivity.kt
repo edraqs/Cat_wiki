@@ -15,9 +15,11 @@ class BreedInfoActivity : AppCompatActivity(){
         size_view.text = getIntent().getStringExtra("BREEDSIZE")
         coat_view.text = getIntent().getStringExtra("BREEDCOAT")
         color_view.text = getIntent().getStringExtra("BREEDCOLOR")
-        lifespan_view.text = getIntent().getStringExtra("BREEDLIFESPAN")
+        val lifespan = getIntent().getStringExtra("BREEDLIFESPAN")
+        if (lifespan != ""){
+            lifespan_view.text = lifespan
+        }
         //image_car.setImageResource(getIntent().getStringExtra("BREEDIMAGE").toInt())
-
     }
 }
 
