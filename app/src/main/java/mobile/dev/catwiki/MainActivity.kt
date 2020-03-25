@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         listCatBreeds.add(breed1)
         listCatBreeds.add(breed2)
         listCatBreeds.add(breed3)
+        listCatBreeds.add(breed3)
         viewManager = LinearLayoutManager(this)
         viewAdapter = BreedAdapter(listCatBreeds, this)
 
