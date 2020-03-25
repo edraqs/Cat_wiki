@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Cat wiki</string>
+    <string name="size_string">Size:</string>
+    <string name="coat_string">Coat:</string>
+    <string name="color_string">Color:</string>
+    <string name="lifespan_string">Lifespan:</string>
+    <string name="name">Name</string>
+    <string name="no_info">No information</string>
 </resources>

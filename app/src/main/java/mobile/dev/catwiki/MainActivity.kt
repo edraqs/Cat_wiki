@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
 
         var breed1 = CatBreed("Abyssinian cat","Small to medium, with males weighing 7 to 10 pounds and females weighing 6 to 8 pounds","Medium","Ruddy, red, blue, fawn","9 to 15 years")
         var breed2 = CatBreed("American Bobtail","Medium to large, with males weighing 12 to 16 pounds and females weighing 7 to 11 pounds ","Medium (shorthair) and long (longhair) ","White, black, blue, red, cream, chocolate, lavender, cinnamon, fawn, plus various patterns and shadings","")
-        var breed3 = CatBreed("Bengal","","","","")
+        var breed3 = CatBreed("Bengal","","","Balinese - seal point, chocolate point, blue point and lilac point, plus various patterns and shadings; Javanese – red point, cream point and seal point, plus various patterns and shadings ","")
         var listCatBreeds = ArrayList<CatBreed>()
         listCatBreeds.add(breed1)
         listCatBreeds.add(breed2)
@@ -50,8 +50,6 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         intent.putExtra("BREEDLIFESPAN", item.lifespan)
         //intent.putExtra("BREEDIMAGE", item.image.toString())
         startActivity(intent)
-
-
     }
 
 }
