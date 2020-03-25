@@ -19,7 +19,7 @@ class BreedAdapter( var breedList: ArrayList<CatBreed>, var clickListener: OnIte
 
         fun initialize(item: CatBreed, action:OnItemClickListener){
             name.text = item.name
-            //image.setImageResource(item.image)
+            image.setImageResource(item.image)
 
             itemView.setOnClickListener{
                 action.onItemClick(item,adapterPosition)
