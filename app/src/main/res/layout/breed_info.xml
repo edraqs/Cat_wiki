@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="150dp"
+        android:layout_height="169dp"
+        app:layout_constraintBottom_toTopOf="@+id/scroll_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1"
+        tools:srcCompat="@tools:sample/avatars[3]" />
+
+    <TextView
+        android:id="@+id/name_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_view"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <ScrollView
+        android:id="@+id/scroll_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_view">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fields_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <TextView
+                android:id="@+id/size_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Size:"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/size_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.124"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/size_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="size"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toTopOf="@+id/coat_tag"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.129"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/size_tag"
+                app:layout_constraintVertical_bias="0.01" />
+
+            <TextView
+                android:id="@+id/coat_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Coat:"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/coat_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.13"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/size_view"
+                app:layout_constraintVertical_bias="0.55" />
+
+            <TextView
+                android:id="@+id/coat_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="coat"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toTopOf="@+id/color_tag"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.13"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/coat_tag"
+                app:layout_constraintVertical_bias="0.01" />
+
+            <TextView
+                android:id="@+id/color_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Color:"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/color_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.13"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/coat_view"
+                app:layout_constraintVertical_bias="0.65" />
+
+            <TextView
+                android:id="@+id/color_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="color"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toTopOf="@+id/lifespan_tag"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.13"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/color_tag"
+                app:layout_constraintVertical_bias="0.01" />
+
+            <TextView
+                android:id="@+id/lifespan_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lifespan:"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/lifespan_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.13"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/color_view"
+                app:layout_constraintVertical_bias="0.75" />
+
+            <TextView
+                android:id="@+id/lifespan_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="lifespan"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.13"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lifespan_tag"
+                app:layout_constraintVertical_bias="0.01" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
