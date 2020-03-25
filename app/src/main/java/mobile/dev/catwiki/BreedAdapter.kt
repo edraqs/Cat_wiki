@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.list_item.view.*
+import kotlinx.android.synthetic.main.grid_layout_list_item.view.*
 
 class BreedAdapter( var breedList: ArrayList<CatBreed>, var clickListener: OnItemClickListener) :
     RecyclerView.Adapter<BreedAdapter.ViewHolder>() {
@@ -31,7 +31,7 @@ class BreedAdapter( var breedList: ArrayList<CatBreed>, var clickListener: OnIte
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // create a new view
-        return ViewHolder( LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false))
+        return ViewHolder( LayoutInflater.from(parent.context).inflate(R.layout.grid_layout_list_item, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
