@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         intent.putExtra("BREEDCOLOR", item.color)
         intent.putExtra("BREEDLIFESPAN", item.lifespan)
         //intent.putExtra("BREEDIMAGE", item.image.toString())
+        //hello
         startActivity(intent)
 
 
