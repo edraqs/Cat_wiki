@@ -19,7 +19,6 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
-            android:layout_weight="1"
             android:src="@drawable/ic_launcher_background" />
 
         <TextView
@@ -28,7 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/breed_image"
             android:layout_centerHorizontal="true"
-            android:text="Title Text"
             android:textStyle="bold" />
 
     </RelativeLayout>
