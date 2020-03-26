@@ -14,22 +14,24 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
+import java.io.Serializable
 
 class MainActivity : AppCompatActivity(), OnItemClickListener, NavigationView.OnNavigationItemSelectedListener {
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var gridLayoutManager: GridLayoutManager
-    private lateinit var viewAdapter: BreedAdapter
-    private lateinit var viewManager: RecyclerView.LayoutManager
-    private lateinit var listCatBreeds: ArrayList<CatBreed>
+    lateinit var recyclerView: RecyclerView
+    lateinit var gridLayoutManager: GridLayoutManager
+    lateinit var viewAdapter: BreedAdapter
+    lateinit var viewManager: RecyclerView.LayoutManager
+    lateinit var listCatBreeds: ArrayList<CatBreed>
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
+    private val recyclerFragment = RecyclerFragment()
+    private val infoFragment = InfoFragment()
+    private val fragmentManager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,37 +54,34 @@ class MainActivity : AppCompatActivity(), OnItemClickListener, NavigationView.On
         listCatBreeds = ArrayList()
         listCatBreeds = setDataInList("")
 
+        val args = Bundle()
+        args.putSerializable("LIST", listCatBreeds as Serializable)
+        recyclerFragment.arguments = args
+
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.myFragment, recyclerFragment)
+        fragmentTransaction.commit()
+
         viewManager = LinearLayoutManager(this)
         viewAdapter = BreedAdapter(listCatBreeds, this)
-
-        recyclerView = findViewById<RecyclerView>(R.id.cats_recycler_view)
-        gridLayoutManager = GridLayoutManager(applicationContext, 2, LinearLayoutManager.VERTICAL, false)
-
-
-        recyclerView.apply {
-            // use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
-            setHasFixedSize(true)
-
-            // use a linear layout manager
-            //layoutManager = viewManager
-            layoutManager = gridLayoutManager
-
-            // specify an viewAdapter (see also next example)
-            adapter = viewAdapter
-
-        }
-
 
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_list -> {
-                Toast.makeText(this, "List clicked", Toast.LENGTH_SHORT).show()
+                val fragment = RecyclerFragment()
+                val args = Bundle()
+                args.putSerializable("LIST", listCatBreeds)
+                fragment.arguments = args
+                val fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.myFragment, recyclerFragment)
+                fragmentTransaction.commit()
             }
             R.id.nav_info -> {
-                Toast.makeText(this, "Info clicked", Toast.LENGTH_SHORT).show()
+                val fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.myFragment, infoFragment)
+                fragmentTransaction.commit()
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
@@ -98,29 +97,6 @@ class MainActivity : AppCompatActivity(), OnItemClickListener, NavigationView.On
         intent.putExtra("BREEDLIFESPAN", item.lifespan)
         intent.putExtra("BREEDIMAGE", item.image.toString())
         startActivity(intent)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-
-        val searchItem = menu?.findItem(R.id.action_search)
-        val searchView = searchItem?.actionView as SearchView
-        searchView.setQueryHint("Search View Hint")
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                //If you want to filter each time a char is typed
-                viewAdapter.filter.filter(newText)
-                return false
-            }
-
-            override fun onQueryTextSubmit(query: String): Boolean {
-                //If you want to filter by tapping enter
-                return false
-            }
-        })
-        return true
     }
 
     private fun setDataInList(path: String): ArrayList<CatBreed> {

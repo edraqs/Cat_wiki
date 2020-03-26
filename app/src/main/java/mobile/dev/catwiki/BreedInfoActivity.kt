@@ -11,11 +11,11 @@ class BreedInfoActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.breed_info)
 
-        name_view.text = getIntent().getStringExtra("BREEDNAME")
-        size_view.text = getIntent().getStringExtra("BREEDSIZE")
-        coat_view.text = getIntent().getStringExtra("BREEDCOAT")
-        color_view.text = getIntent().getStringExtra("BREEDCOLOR")
-        val lifespan = getIntent().getStringExtra("BREEDLIFESPAN")
+        name_view.text = intent.getStringExtra("BREEDNAME")
+        size_view.text = intent.getStringExtra("BREEDSIZE")
+        coat_view.text = intent.getStringExtra("BREEDCOAT")
+        color_view.text = intent.getStringExtra("BREEDCOLOR")
+        val lifespan = intent.getStringExtra("BREEDLIFESPAN")
         if (lifespan != ""){
             lifespan_view.text = lifespan
         }
