@@ -19,7 +19,7 @@ class BreedInfoActivity : AppCompatActivity(){
         if (lifespan != ""){
             lifespan_view.text = lifespan
         }
-        //image_car.setImageResource(getIntent().getStringExtra("BREEDIMAGE").toInt())
+        image_view.setImageResource(getIntent().getStringExtra("BREEDIMAGE").toInt())
     }
 }
 

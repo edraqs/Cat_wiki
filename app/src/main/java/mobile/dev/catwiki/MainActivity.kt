@@ -1,28 +1,30 @@
 package mobile.dev.catwiki
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.widget.ImageView
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
-import java.io.InputStream
 
 class MainActivity : AppCompatActivity(), OnItemClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var gridLayoutManager: GridLayoutManager
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewAdapter: BreedAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var listCatBreeds: ArrayList<CatBreed>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         listCatBreeds = ArrayList()
         listCatBreeds = setDataInList("")
 
@@ -59,6 +61,29 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         intent.putExtra("BREEDLIFESPAN", item.lifespan)
         intent.putExtra("BREEDIMAGE", item.image.toString())
         startActivity(intent)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+
+        val searchItem = menu?.findItem(R.id.action_search)
+        val searchView = searchItem?.actionView as SearchView
+        searchView.setQueryHint("Search View Hint")
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                //If you want to filter each time a char is typed
+                viewAdapter.filter.filter(newText)
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                //If you want to filter by tapping enter
+                return false
+            }
+        })
+        return true
     }
 
     private fun setDataInList(path: String): ArrayList<CatBreed> {
